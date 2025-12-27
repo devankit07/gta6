@@ -41,24 +41,23 @@ const App = () => {
         scale: 1,
         rotate: 0,
         duration: 2,
-        delay: -1.4,
+        delay: -1.1,
         ease: "expo.inOut",
       });
 
       gsap.to(".character", {
-        bottom: "-10%",
-        scale: 1.2,
+        bottom: "-12%",
+        scale: 1.25,
         delay: -1.5,
       });
 
       const handler = (e) => {
-        const x = (e.clientX / window.innerWidth - 0.5) * 30;
-        const y = (e.clientY / window.innerHeight - 0.5) * 20;
+        const moveX = (e.clientX / window.innerWidth - 0.5) * 20;
 
-        gsap.to(".text", { x: x * 0.6, y: y * 0.6, duration: 0.5 });
-        gsap.to(".character", { x: x * 0.4, y: y * 0.3, duration: 0.5 });
-        gsap.to(".bg", { x: x * 0.25, y: y * 0.2, duration: 0.5 });
-        gsap.to(".sky", { x: x * 0.15, y: y * 0.1, duration: 0.5 });
+        gsap.to(".text", { x: moveX * 0.6, duration: 0.4, ease: "power3.out" });
+        gsap.to(".character", { x: moveX * 0.4, duration: 0.4, ease: "power3.out" });
+        gsap.to(".bg", { x: moveX * 0.25, duration: 0.4, ease: "power3.out" });
+        gsap.to(".sky", { x: moveX * 0.15, duration: 0.4, ease: "power3.out" });
       };
 
       const el = mainRef.current;
@@ -71,7 +70,7 @@ const App = () => {
   return (
     <>
       {!showContent && (
-        <div className="fixed inset-0 z-[100] bg-black">
+        <div className="fixed inset-0 z-[100] bg-black overflow-hidden">
           <svg className="w-full h-full" viewBox="0 0 800 600">
             <defs>
               <mask id="viMask">
@@ -91,12 +90,7 @@ const App = () => {
                 </g>
               </mask>
             </defs>
-            <image
-              href="/bg.jpg"
-              width="100%"
-              height="100%"
-              mask="url(#viMask)"
-            />
+            <image href="/bg.jpg" width="100%" height="100%" mask="url(#viMask)" />
           </svg>
         </div>
       )}
@@ -104,10 +98,11 @@ const App = () => {
       {showContent && (
         <div
           ref={mainRef}
-          className="main w-full scale-[1.6] rotate-[-10deg] origin-center"
+          className="main w-full scale-[1.4] rotate-[-10deg] origin-center overflow-hidden"
         >
           <div className="relative w-full h-screen bg-black overflow-hidden">
-            <div className="absolute top-0 left-0 w-full px-8 py-6 z-30">
+
+            <div className="absolute top-0 left-0 w-full px-8 py-6 z-20">
               <div className="flex items-center gap-4 text-white">
                 <div className="flex flex-col gap-1">
                   <span className="w-8 h-1 bg-white"></span>
@@ -127,7 +122,7 @@ const App = () => {
               className="bg absolute inset-0 w-full h-full object-cover scale-[1.8] rotate-[-5deg]"
             />
 
-            <div className="text absolute top-24 left-1/2 -translate-x-1/2 text-white scale-[1.3] rotate-[-10deg] text-center">
+            <div className="text absolute top-24 left-1/2 -translate-x-1/2 text-white scale-[1.4] rotate-[-20deg] text-center z-10">
               <h1 className="text-[10vw] leading-none">grand</h1>
               <h1 className="text-[8vw] leading-none">theft</h1>
               <h1 className="text-[10vw] leading-none">auto</h1>
@@ -135,10 +130,10 @@ const App = () => {
 
             <img
               src="/boybg.png"
-              className="character absolute left-1/2 -translate-x-1/2 -bottom-[120%] scale-[4] rotate-[-20deg]"
+              className="character absolute left-1/2 -translate-x-1/2 -bottom-[120%] scale-[3] rotate-[-20deg]"
             />
 
-            <div className="absolute bottom-0 w-full px-6 py-8 text-white bg-gradient-to-t from-black">
+            <div className="absolute bottom-0 w-full px-6 py-8 text-white bg-gradient-to-t from-black z-20">
               <div className="flex items-center gap-2">
                 <i className="ri-arrow-down-line text-3xl"></i>
                 <span>Scroll Down</span>
@@ -154,11 +149,10 @@ const App = () => {
                 <h1 className="text-5xl mb-4">Still Chasing</h1>
                 <h1 className="text-4xl mb-6">Not Getting</h1>
                 <p className="text-lg opacity-80 font-[Helvetica_Now_Display]">
-                  A city built on ambition, crime, and desire. Every street
-                  hides a secret, every corner tells a story. In a world where
-                  power decides everything, your choices define who you become.
-                  Welcome to a place where legends are not born — they are
-                  taken.
+                  A city built on ambition, crime, and desire. Every street hides
+                  a secret, every corner tells a story. In a world where power
+                  decides everything, your choices define who you become.
+                  Welcome to a place where legends are not born — they are taken.
                 </p>
                 <p className="text-lg opacity-80 font-[Helvetica_Now_Display] mt-3">
                   Step into a city driven by crime, power, and ambition.
